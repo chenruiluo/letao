@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,kBAAkB,CAAC;EAEf,QAAQ,EAAE,MAAM;EAChB,aAAa,EAAE,QAAQ;EACvB,OAAO,EAAE,WAAW;EACpB,kBAAkB,EAAE,QAAQ;EAC5B,kBAAkB,EAAE,CAAC;CACxB",
+    "sources": [
+        "../src/assets/common.scss"
+    ],
+    "names": [],
+    "file": "common.min.css"
+}
