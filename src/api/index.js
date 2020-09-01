@@ -37,4 +37,15 @@ export function getThumbimages(id){
 export function getGoodsInfo(id){
     return instance.get(`/getgoodsinfo/${id}`)
 }
-
+//  图片分享的分类数据
+export function getCateGory(){
+    return instance.get(`/getcategory`)
+}
+//获取分类的数据
+export function getCateData(id){
+    return instance.get(`getcatelist/${id}`)
+}
+// 获取取图片详情中的缩略图
+export function getThum(id){
+    return instance.get(`getthumbimages/${id}`)
+}

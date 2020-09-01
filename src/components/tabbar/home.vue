@@ -8,15 +8,15 @@
         </van-swipe>
         <!-- 分类功能 -->
         <van-grid :column-num="4" :border="false" class="classify">
-            <van-grid-item @click="cutRouter('/goodsList')" icon="photo-o" text="文字"  >
+            <van-grid-item @click="$router.push('/goodsList')" icon="photo-o" text="文字"  >
                 <img src="@/assets/images/menu10.png" alt="">
                 <span>数码电器</span>
             </van-grid-item>
-            <van-grid-item @click="cutRouter('/newsList')" icon="photo-o" text="文字">
+            <van-grid-item @click="$router.push('/newsList')" icon="photo-o" text="文字">
                 <img src="@/assets/images/menu19.png" alt="">
                 <span>乐淘头条</span>
             </van-grid-item>
-            <van-grid-item icon="photo-o" text="文字">
+            <van-grid-item @click="$router.push('/photo')" icon="photo-o" text="文字">
                 <img src="@/assets/images/menu18.png" alt="">
                 <span>美图欣赏</span>
             </van-grid-item>
@@ -101,11 +101,6 @@ import {getSwipeData,getGoodsData} from "@/api/index.js";
             async getGoods(){
                var res = await getGoodsData();
                this.goods = res.message;
-            },
-            // 传先父组件并跳转页面跳转
-            cutRouter(path){
-                 // 跳转路由
-                this.$router.push(path);
             },
         },
         created(){

@@ -37,13 +37,16 @@
         <van-goods-action>
             <van-goods-action-icon icon="chat-o" text="客服" />
             <van-goods-action-icon icon="cart-o" to="/mycar" :badge="carCount" text="购物车" />
-            <van-goods-action-button type="warning" text="加入购物车" />
+            <van-goods-action-button type="warning" @click="addShop()" text="加入购物车" />
             <van-goods-action-button type="danger" text="立即购买" />
         </van-goods-action>
     </div>
 </template>
 
 <script>
+// 获取本地存储的购物车数据
+// var shopping = JSON.parse(localStorage.getItem("shopping")|| '[]');
+
 // vant
 import { Swipe, SwipeItem,Divider,Stepper,GoodsAction, GoodsActionIcon, GoodsActionButton  } from 'vant';
 // 请求
@@ -57,12 +60,14 @@ import {getThumbimages,getGoodsInfo} from "@/api/index.js"
                 goodsData:"",
                 value:1,
                 carCount:this.$parent.count,
+                shopping:this.$parent.shopping,
             }
         },
         methods:{
             async getData(){
                 // 轮播请求
                 var {message} = await getThumbimages(this.goodsId);
+                
                 // 判断数据是否为空
                 if(message.length==0){
                     var obj = {
@@ -74,6 +79,35 @@ import {getThumbimages,getGoodsInfo} from "@/api/index.js"
                 // 获取商品详情
                 var res = await getGoodsInfo(this.goodsId);
                 this.goodsData = res.message;
+                // console.log(this.goodsData);
+            },
+            addShop(){
+                // 查找商品是否存在
+               var index = this.shopping.findIndex(v =>v.id==this.goodsId);
+                
+                if(index !== -1){
+                    this.shopping[index].number =  this.shopping[index].number + this.value;
+                }else{
+                    var obj = {
+                        id:this.goodsId,
+                        number:this.value,
+                        price:this.goodsData.sell_price,
+                        selected:false
+                    }
+                    this.shopping.push(obj);
+                }
+                this.isCar = true
+                // 存入本地
+                localStorage.setItem("shopping",JSON.stringify(this.shopping));
+
+                // 统计购物车的数量
+                var count = 0;
+                this.shopping.forEach(v => {
+                    count += v.number;
+                });
+                
+               this.$parent.count = this.carCount = count;
+                
             }
         },
         components:{

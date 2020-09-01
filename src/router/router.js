@@ -10,6 +10,7 @@ import goodsList from "@/components/list/goods/goodsList.vue"
 import goodsDetails from "@/components/list/goods/goodsDetails.vue"
 import newsList from "@/components/list/news/newsList.vue"
 import newsData from "@/components/list/news/newsData.vue"
+import photo from "@/components/list/photo/photo.vue"
 
 // 实例化路由对象，写路由匹配规则
 let router = new vueRouter({
@@ -22,6 +23,7 @@ let router = new vueRouter({
         {path:"/newsList",component:newsList},
         {path:"/newsData/:newId",component:newsData,props:true},
         {path:"/goodsDetails/:goodsId",component:goodsDetails,props:true},
+        {path:"/photo",component:photo},
     ]
 });
 // 抛出

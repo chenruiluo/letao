@@ -31,6 +31,8 @@
 </template>
 
 <script>
+// 获取本地存储的购物车数据
+var shopping = JSON.parse(localStorage.getItem("shopping")|| '[]');
 // 按需引入vant组件
 import { Search,Tabbar,Toast ,NavBar , TabbarItem ,Sticky } from 'vant';
 
@@ -42,6 +44,7 @@ import { Search,Tabbar,Toast ,NavBar , TabbarItem ,Sticky } from 'vant';
                 count:0,
                 title:"",
                 isBottom:true,
+                shopping:shopping,
             }
         },
         methods:{
@@ -52,6 +55,13 @@ import { Search,Tabbar,Toast ,NavBar , TabbarItem ,Sticky } from 'vant';
                 // 回退
                 this.$router.go(-1);
             }
+        },created(){
+             var count = 0;
+                shopping.forEach(v => {
+                    count += v.number;
+                });
+                // 统计购物车的数量
+              this.count = count;
         },
         // 挂载组件
         components:{
