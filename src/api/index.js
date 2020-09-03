@@ -49,3 +49,7 @@ export function getCateData(id){
 export function getThum(id){
     return instance.get(`getthumbimages/${id}`)
 }
+// 获取购物车商品数据
+export function getShopCarList(ids){
+    return instance.get(`getshopcarlist/${ids}`)
+}

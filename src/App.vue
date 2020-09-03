@@ -24,7 +24,7 @@
         <!-- 底部 -->
         <van-tabbar v-show="isBottom" v-model="state" route>
             <van-tabbar-item to="/home" icon="wap-home-o" >首页</van-tabbar-item>
-            <van-tabbar-item to="/mycar" icon="cart-o" :badge="count">购物车</van-tabbar-item>
+            <van-tabbar-item to="/mycar" icon="cart-o" :badge="$store.getters.totalCar">购物车</van-tabbar-item>
             <van-tabbar-item to="/user" icon="user-o" >我的乐淘</van-tabbar-item>
         </van-tabbar>
     </div>
@@ -32,7 +32,7 @@
 
 <script>
 // 获取本地存储的购物车数据
-var shopping = JSON.parse(localStorage.getItem("shopping")|| '[]');
+// var shopping = JSON.parse(localStorage.getItem("shopping")|| '[]');
 // 按需引入vant组件
 import { Search,Tabbar,Toast ,NavBar , TabbarItem ,Sticky } from 'vant';
 
@@ -41,10 +41,8 @@ import { Search,Tabbar,Toast ,NavBar , TabbarItem ,Sticky } from 'vant';
             return {
                 state:0,
                 active:0,
-                count:0,
                 title:"",
                 isBottom:true,
-                shopping:shopping,
             }
         },
         methods:{
@@ -55,13 +53,6 @@ import { Search,Tabbar,Toast ,NavBar , TabbarItem ,Sticky } from 'vant';
                 // 回退
                 this.$router.go(-1);
             }
-        },created(){
-             var count = 0;
-                shopping.forEach(v => {
-                    count += v.number;
-                });
-                // 统计购物车的数量
-              this.count = count;
         },
         // 挂载组件
         components:{
@@ -78,6 +69,7 @@ import { Search,Tabbar,Toast ,NavBar , TabbarItem ,Sticky } from 'vant';
 
         .app_content{
             background-color: #F1F1F1;
+            height: 100vh;
             min-width: 320px;
             max-width: 750px;
             margin: 0 auto;
