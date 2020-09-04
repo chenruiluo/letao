@@ -72,8 +72,6 @@ import { Divider,AddressList,Switch,Stepper,Button,SubmitBar,Cell, CellGroup  } 
                     isDefault: true,
                 }],
                 carList:[],
-                // checked:true,
-                // value: 1,
             }
         },
         methods:{

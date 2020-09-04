@@ -79,8 +79,11 @@ var store = new Vuex.Store({
             // 遍历统计购物车个数
             state.shopping.forEach(v =>{
                 if(v.selected === true){
-                    count += v.number
-                    total += v.number * v.price
+
+                    count += parseInt(v.number)
+                    total += parseInt(v.number) * parseInt(v.price)
+                    console.log( v.id+"==="+ v.price);
+                    console.log( v.id+"==="+ parseInt(v.price));
                 }
             })
             total = total * 100;
