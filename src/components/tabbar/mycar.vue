@@ -20,11 +20,11 @@
                     @edit="onEdit"
                 />
                 <van-divider>购买的商品</van-divider>
-
+            <div class="item">
                 <div class="shop" v-for="(item,i) in carList" :key="item.id">
                     <div class="switch">
                         <van-switch @change="switchover(item.id,$store.getters.getSelected[item.id])"
-                         v-model="$store.getters.getSelected[item.id]" />
+                        v-model="$store.getters.getSelected[item.id]" />
                     </div>
                     <!-- <div class="goods-img"> -->
                     <img :src="item.thumb_path" >
@@ -52,6 +52,7 @@
                     </van-submit-bar>
                 </div>
             </div>
+        </div>
     </div>
 </template>
 
@@ -175,32 +176,36 @@ import { Divider,AddressList,Switch,Stepper,Button,SubmitBar,Cell, CellGroup  } 
                 }
             }
         }
-        .shop{
-            display: flex;
-            align-items: center;
-            padding: 10px 8px;
-            margin: 10px;
-            background-color: #fff;
-            border-radius: 8px;
-            .switch{
-                display: inline-block;
-            }
-            img{
-                width: 50px;
-                height: 60px;
-                margin: 0 4px;
-            }
-            .info{
-                .title{
-                    font-size: 16px;
+        .item{
+            padding-bottom: 80px;
+            background-color: #F1F1F1;
+            .shop{
+                display: flex;
+                align-items: center;
+                padding: 10px 8px;
+                margin: 10px;
+                background-color: #fff;
+                border-radius: 8px;
+                .switch{
+                    display: inline-block;
                 }
-                .row{
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                    .price{
+                img{
+                    width: 50px;
+                    height: 60px;
+                    margin: 0 4px;
+                }
+                .info{
+                    .title{
                         font-size: 16px;
-                        color: #FF0000;
+                    }
+                    .row{
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        .price{
+                            font-size: 16px;
+                            color: #FF0000;
+                        }
                     }
                 }
             }

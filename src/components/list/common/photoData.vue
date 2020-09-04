@@ -56,7 +56,7 @@ import { ImagePreview } from 'vant';
                 padding: 2px;
                 margin-top: 4px;
                 img{
-                    width: 100px;
+                    width: 45%;
                     height: 100px;
                 }
                 .text{
