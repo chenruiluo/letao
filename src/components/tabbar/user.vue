@@ -18,7 +18,7 @@
                 <van-cell title="提交反馈" is-link />
             </van-cell-group>
             <van-cell-group>
-                <van-cell title="关于乐淘" value="v1.0.0" />
+                <van-cell title="关于乐淘" value="v1.0.0 " />
             </van-cell-group>
             <van-cell-group>
                 <van-cell title="weixin h5 pay"  />
