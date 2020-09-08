@@ -3,7 +3,7 @@
         <div class="basic">
             <div class="logo">
                 <img src="../../assets/images/logo.png">
-                <span class="name">用户名: 洛</span>
+                <span class="name">用户名: {{name}}</span>
             </div>
             <van-cell-group>
                 <van-cell title="修改密码" is-link />
@@ -12,7 +12,7 @@
                 <van-cell title="我的订单" is-link />
             </van-cell-group>
             <van-cell-group>
-                <van-cell title="地址管理" class="site" is-link />
+                <van-cell to="/siteList" title="地址管理" class="site" is-link />
             </van-cell-group>
              <van-cell-group>
                 <van-cell title="提交反馈" is-link />
@@ -31,10 +31,11 @@
 
 <script>
 import { Button,Dialog,Cell, CellGroup  } from 'vant';
+import {isToken} from '@/api/index.js'
     export default {
         data() {
             return {
-
+                name,
             }
         },
         methods:{
@@ -44,7 +45,9 @@ import { Button,Dialog,Cell, CellGroup  } from 'vant';
                 message: '你确定要退出吗',
                 confirmButtonColor:"#409DFB"
                 }).then(() => {//确定
-                    this.$toast("确定");
+                    localStorage.setItem("token","");
+                    localStorage.setItem("userInfo","{}");
+                    this.$router.push("/login");
                 }).catch(() => {//取消
                     this.$toast("取消");
                 });
@@ -58,8 +61,11 @@ import { Button,Dialog,Cell, CellGroup  } from 'vant';
             "van-cell":Cell,
         },
         created(){
+            // 判断是否登录
+            isToken();
+            var user =  JSON.parse(localStorage.getItem("userInfo") || "{}") ;
+            this.name = user.username;
             this.$parent.title = "个人中心";
-            this.$parent.active = -1;
             this.$parent.isBottom = false;
         }
     }

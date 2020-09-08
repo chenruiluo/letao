@@ -107,7 +107,8 @@ import {getSwipeData,getGoodsData} from "@/api/index.js";
             this.getSwipe();
             this.getGoods();
             // 状态设为0 导航栏切回
-            this.$parent.active = 0
+            this.$parent.active = 0;
+            this.$parent.isBottom = true;
         }
 
     }

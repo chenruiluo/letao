@@ -3,12 +3,12 @@
         <!-- 头部（导航栏） -->
         <van-sticky>
             <div class="nav_bar">
-                <div v-show="active == 0" class="nav">
+                <div class="nav" id="nav">
                     <!-- logo图标 -->
                     <img src="./assets/images/logo.png" alt="">
                     <van-search placeholder="请输入搜索关键词" />
                 </div>
-                <div v-show="active != 0">
+                <div id="bar">
                     <van-nav-bar
                         :title="title"
                         left-arrow
@@ -68,6 +68,7 @@ import { Search,Tabbar,Toast ,NavBar , TabbarItem ,Sticky } from 'vant';
 <style lang="scss" scoped>
 
         .app_content{
+
             background-color: #F1F1F1;
             height: 100vh;
             min-width: 320px;

@@ -59,7 +59,7 @@ import {getGoodsList} from "@/api/index.js"
         created(){
             this.getGoods();
             this.$parent.title = "商品列表"
-            this.$parent.active = -1;
+            // this.$parent.active = -1;
 
         }
     }

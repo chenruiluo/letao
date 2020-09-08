@@ -75,7 +75,7 @@ import { getCateGory,getCateData } from "@/api/index.js"
         },
         created(){
             this.$parent.title = "美图欣赏";
-            this.$parent.active = -1;
+            // this.$parent.active = -1;
             this.getCateGory();
         }
     }

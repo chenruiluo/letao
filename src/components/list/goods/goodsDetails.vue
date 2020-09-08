@@ -101,7 +101,7 @@ import {getThumbimages,getGoodsInfo} from "@/api/index.js"
         },
         created(){
             this.$parent.title = "商品详情";
-            this.$parent.active = -1;
+            // this.$parent.active = -1;
             this.$parent.isBottom = false;
             this.getData();
         }

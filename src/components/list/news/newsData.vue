@@ -53,6 +53,7 @@ import {getNewsData,getCommentList,addCommentData} from "@/api/index.js"
             // 获取新闻详情
             async getNews(){
                 console.log(this.id);
+
                 var {message} = await getNewsData(this.id);
                 this.news = message[0];
             },
@@ -107,7 +108,7 @@ import {getNewsData,getCommentList,addCommentData} from "@/api/index.js"
         },
         created(){
             this.$parent.title = '新闻详情'
-            this.$parent.active = -1;
+            // this.$parent.active = -1;
             this.getNews();
             this.getComment();
         },

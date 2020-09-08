@@ -5,11 +5,13 @@ Vue.use(Vuex);
 
 // 获取本地存储的购物车数据
 var shopping = JSON.parse(localStorage.getItem("shopping")|| '[]');
-
+// 获取登录的用户信息
+var userinfo = JSON.parse( localStorage.getItem("userInfo"));
 var store = new Vuex.Store({
     // 存放组件共享的数据
     state:{
         shopping:shopping,
+        userinfo,
     },
     // mutations 这是修改共享数据唯一的途径
     // 组件中通过 this.$store.commit('setName'，'参数') 进行调用
@@ -81,9 +83,7 @@ var store = new Vuex.Store({
                 if(v.selected === true){
 
                     count += parseInt(v.number)
-                    total += parseInt(v.number) * parseInt(v.price)
-                    console.log( v.id+"==="+ v.price);
-                    console.log( v.id+"==="+ parseInt(v.price));
+                    total += parseInt(v.number) * parseInt(v.price);
                 }
             })
             total = total * 100;

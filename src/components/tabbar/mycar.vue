@@ -17,7 +17,7 @@
                     v-model="chosenAddressId"
                     :list="list"
                     default-tag-text="默认"
-                    @edit="onEdit"
+                    @edit="$router.push('/editSite')"
                 />
                 <van-divider>购买的商品</van-divider>
             <div class="item">
@@ -41,7 +41,7 @@
                     </div>
                 </div>
 
-                <van-cell title="单元格" icon="gold-coin-o" />
+                <van-cell title="微信支付" icon="gold-coin-o" is-link />
 
                 <div class="submit-bar">
                     <van-submit-bar :price="$store.getters.buyCountAndTotal.total" button-text="提交订单" @submit="onSubmit">
@@ -111,7 +111,7 @@ import { Divider,AddressList,Switch,Stepper,Button,SubmitBar,Cell, CellGroup  } 
         },
         created(){
             this.$parent.title = "我的购物车";
-            this.$parent.active = -1;
+            // this.$parent.active = -1;
             this.$parent.isBottom = true;
             // 判断购物车里是否有数据
             this.getShopList()
