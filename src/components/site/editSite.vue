@@ -17,9 +17,9 @@
 </template>
 
 <script>
-import { AddressEdit } from "vant";
+import { AddressEdit, } from "vant";
 import areaList from "@/util/area.js";
-import { deleteAddress,updateAddress } from "@/api/index.js"
+import { deleteAddress,updateAddress,getAddress } from "@/api/index.js"
 export default {
   props: ["site"],
   data() {
@@ -34,7 +34,17 @@ export default {
     // 编辑收货地址
    async onSave(addressInfo) {
         // addressInfo 修改地址内容
-        addressInfo.country = this.country;
+        if(addressInfo.isDefault){
+            var res = await getAddress(this.$store.state.userinfo.id);
+            // 将数组的默认状态转成flase值
+            res.forEach(async (v) =>{
+                v.isDefault = false
+                await updateAddress(v.id,v);
+            })
+        }
+        // 没修改地区就用原来的地区
+        addressInfo.country = this.country == "" ? this.addressInfo.country : this.country;
+        console.log(addressInfo.isDefault);
         var {status,message} = await updateAddress(addressInfo.id,addressInfo);
         this.$toast(message)
         if(status == 0){
@@ -50,6 +60,14 @@ export default {
             this.$router.push("/siteList");
         }
     },
+    // 修改默认地址
+    async setDefault(){
+         // 获取用户信息
+        var user = this.$store.state.userinfo;
+
+    },
+
+
     // 修改收件地区时触发
     changeArea(val) {
         this.country=val[2].name;

@@ -28,7 +28,7 @@ export default {
   methods: {
     //   用户新增地址
     async onSave(site) {
-        
+
         site.country = this.country;
         site.isDefault = site.isDefault == true ? 1 : 0
 
@@ -38,12 +38,9 @@ export default {
         if(status == 0){
             this.$router.push("/siteList");
         }
-
-
     },
     // 修改收件地区时触发
     changeArea(val) {
-        console.log(val[2]);
         this.country=val[2].name;
     },
   },

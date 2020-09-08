@@ -6,7 +6,7 @@ Vue.use(Vuex);
 // 获取本地存储的购物车数据
 var shopping = JSON.parse(localStorage.getItem("shopping")|| '[]');
 // 获取登录的用户信息
-var userinfo = JSON.parse( localStorage.getItem("userInfo"));
+var userinfo = JSON.parse(localStorage.getItem("userInfo") || "{}") ;
 var store = new Vuex.Store({
     // 存放组件共享的数据
     state:{

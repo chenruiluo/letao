@@ -44,7 +44,6 @@ import { getAddress } from "@/api/index.js"
                     v.address =  `${v.province}-${v.city}-${v.country}-${v.addressDetail}`
                 })
                 this.list = res
-                console.log(this.list);
             },
 
         },

@@ -39,6 +39,7 @@ import {isToken} from '@/api/index.js'
             }
         },
         methods:{
+            // 退出登录
             logout(){
                 Dialog.confirm({
                 // title: '标题',
@@ -63,7 +64,7 @@ import {isToken} from '@/api/index.js'
         created(){
             // 判断是否登录
             isToken();
-            var user =  JSON.parse(localStorage.getItem("userInfo") || "{}") ;
+            var user =  this.$store.state.userinfo;
             this.name = user.username;
             this.$parent.title = "个人中心";
             this.$parent.isBottom = false;
