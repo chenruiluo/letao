@@ -57,20 +57,22 @@
 </template>
 
 <script>
-import {getShopCarList} from "@/api/index.js"
+import {getShopCarList,getAddress} from "@/api/index.js"
 import { Divider,AddressList,Switch,Stepper,Button,SubmitBar,Cell, CellGroup  } from 'vant';
     export default {
         data() {
             return {
                 blank:true,
                 chosenAddressId: '1',
-                 list: [ {
-                    id: '1',
-                    name: '陈洛',
-                    tel: '13000000000',
-                    address: '浙江省杭州市西湖区文三路 138 号东方通信大厦 7 楼 501 室',
-                    isDefault: true,
-                }],
+                 list: [
+                //      {
+                //     id: '1',
+                //     name: '陈洛',
+                //     tel: '13000000000',
+                //     address: '浙江省杭州市西湖区文三路 138 号东方通信大厦 7 楼 501 室',
+                //     isDefault: true,
+                // }
+                ],
                 carList:[],
             }
         },
@@ -107,9 +109,25 @@ import { Divider,AddressList,Switch,Stepper,Button,SubmitBar,Cell, CellGroup  } 
             // 步进器
             changeNumber(id,number){
                 this.$store.commit("carNumber",{id,number})
-            }
-        },
+            },
+            // 默认的收货地址
+            async setDefault(){
+                // 获取用户信息
+                var user = this.$store.state.userinfo;
+                var res = await getAddress(user.id);
+                    // 将数组的默认状态转成flase值
+                res.forEach(v =>{
+                    if(v.isDefault == true){
+
+                        this.chosenAddressId = v.id
+                        v.address =  `${v.province}-${v.city}-${v.country}-${v.addressDetail}`
+                        this.list.push(v);
+                    }
+                })
+            },
+       },
         created(){
+            this.setDefault();
             this.$parent.title = "我的购物车";
             // this.$parent.active = -1;
             this.$parent.isBottom = true;

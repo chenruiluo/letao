@@ -35,12 +35,13 @@ export default {
    async onSave(addressInfo) {
         // addressInfo 修改地址内容
         if(addressInfo.isDefault){
-            var res = await getAddress(this.$store.state.userinfo.id);
-            // 将数组的默认状态转成flase值
-            res.forEach(async (v) =>{
-                v.isDefault = false
-                await updateAddress(v.id,v);
-            })
+            var user = this.$store.state.userinfo;
+            var res = await getAddress(user.id);
+                // 将数组的默认状态转成flase值
+                res.forEach(async (v) =>{
+                    v.isDefault = false
+                    await updateAddress(v.id,v);
+                })
         }
         // 没修改地区就用原来的地区
         addressInfo.country = this.country == "" ? this.addressInfo.country : this.country;
@@ -60,13 +61,6 @@ export default {
             this.$router.push("/siteList");
         }
     },
-    // 修改默认地址
-    async setDefault(){
-         // 获取用户信息
-        var user = this.$store.state.userinfo;
-
-    },
-
 
     // 修改收件地区时触发
     changeArea(val) {
