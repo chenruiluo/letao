@@ -49,7 +49,7 @@ export default {
         var {status,message} = await updateAddress(addressInfo.id,addressInfo);
         this.$toast(message)
         if(status == 0){
-            this.$router.push("/siteList");
+           this.$router.go(-1);
         }
     },
     // 删除收货地址
@@ -69,7 +69,7 @@ export default {
 
   },
   created() {
-
+    this.addressInfo.isDefault = this.addressInfo.isDefault == 1 ? true : false;
     this.$parent.title = "编辑地址";
     // this.$parent.active = -1;
     this.$parent.isBottom = true;

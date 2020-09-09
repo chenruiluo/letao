@@ -104,7 +104,7 @@ import {getThumbimages,getGoodsInfo} from "@/api/index.js"
             // this.$parent.active = -1;
             this.$parent.isBottom = false;
             this.getData();
-        }
+        },
     }
 </script>
 

@@ -12,10 +12,12 @@ var store = new Vuex.Store({
     state:{
         shopping:shopping,
         userinfo,
+        isPending:false,
     },
     // mutations 这是修改共享数据唯一的途径
     // 组件中通过 this.$store.commit('setName'，'参数') 进行调用
     mutations:{
+        //添加购物车
         addCar(state,goods){
              // 查找商品是否存在
              var index = state.shopping.findIndex(v =>v.id == goods.id);
@@ -46,12 +48,17 @@ var store = new Vuex.Store({
              // 存入本地
              localStorage.setItem("shopping",JSON.stringify(state.shopping));
         },
+        // 修改购物车数量
         carNumber(state,obj){
             var index = state.shopping.findIndex(v => v.id == obj.id);
 
             state.shopping[index].number = obj.number
              // 存入本地
              localStorage.setItem("shopping",JSON.stringify(state.shopping));
+        },
+         // 修改isPending的状态
+         changeIsPending(state, bool){
+            state.isPending = bool;
         }
     },
     // getter就是对数据状态进行处理筛选，我们可以通过getter处理过后再返回给组件使用

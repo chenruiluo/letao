@@ -17,7 +17,7 @@
                     v-model="chosenAddressId"
                     :list="list"
                     default-tag-text="默认"
-                    @edit="$router.push('/editSite')"
+                    @edit="onEdit"
                 />
                 <van-divider>购买的商品</van-divider>
             <div class="item">
@@ -88,8 +88,11 @@ import { Divider,AddressList,Switch,Stepper,Button,SubmitBar,Cell, CellGroup  } 
                 this.carList = message;
             },
             // 编辑地址
-            onEdit(){
-                this.$toast("编辑");
+            onEdit(item, index) {
+                // console.log(item);
+                // console.log(index);
+                item = JSON.stringify(item);
+               this.$router.push(`/editSite/${item}`);
             },
             // 提交生成订单
             onSubmit(){

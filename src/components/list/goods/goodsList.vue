@@ -60,7 +60,9 @@ import {getGoodsList} from "@/api/index.js"
             this.getGoods();
             this.$parent.title = "商品列表"
             // this.$parent.active = -1;
-
+        },
+        activated(){
+            this.$parent.title = "商品列表";
         }
     }
 </script>

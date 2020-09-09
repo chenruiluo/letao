@@ -66,8 +66,6 @@ import { getCateGory,getCateData } from "@/api/index.js"
                 this.items[index].children = children;
                 this.isShow = true;
             }
-
-
         },
         components:{
             "van-tree-select":TreeSelect,
@@ -77,6 +75,9 @@ import { getCateGory,getCateData } from "@/api/index.js"
             this.$parent.title = "美图欣赏";
             // this.$parent.active = -1;
             this.getCateGory();
+        },
+        activated(){
+            this.$parent.title = "美图欣赏";
         }
     }
 </script>

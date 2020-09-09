@@ -19,8 +19,9 @@
             </div>
         </van-sticky>
         <!-- 中间(内容不能写死，这里放路由匹配的动态内容) 使用通信-->
-        <router-view></router-view>
-
+        <keep-alive exclude="goodsDetails,newsData">
+            <router-view></router-view>
+        </keep-alive>
         <!-- 底部 -->
         <van-tabbar v-show="isBottom" v-model="state" route>
             <van-tabbar-item to="/home" icon="wap-home-o" >首页</van-tabbar-item>
@@ -35,7 +36,7 @@
 // var shopping = JSON.parse(localStorage.getItem("shopping")|| '[]');
 // 按需引入vant组件
 import { Search,Tabbar,Toast ,NavBar , TabbarItem ,Sticky } from 'vant';
-
+import { mapState } from "vuex";
     export default {
         data(){
             return {
@@ -52,6 +53,24 @@ import { Search,Tabbar,Toast ,NavBar , TabbarItem ,Sticky } from 'vant';
                 this.isBottom = true;
                 // 回退
                 this.$router.go(-1);
+            }
+        },
+        //计算属性
+        computed:{
+            // isPending(){
+            //     return this.$store.state.isPending;
+            // }
+            // 等价于上面代码
+            ...mapState(["isPending"])
+        },
+        watch:{
+            "isPending":function(isPending){
+              isPending ?  this.$toast.loading({
+                    message: '加载中...',
+                    forbidClick: true,
+                    duration:0,
+                 })
+                : this.$toast.clear()
             }
         },
         // 挂载组件

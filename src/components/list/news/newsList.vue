@@ -97,8 +97,12 @@ import {getNewsList } from "@/api/index.js"
             this.getNews();
             this.$parent.title = "新闻列表";
             // this.$parent.active = -1;
+        },
+        activated(){
+            this.$parent.title = "新闻列表";
         }
-    }
+
+  }
 </script>
 
 <style lang="scss" scoped>
