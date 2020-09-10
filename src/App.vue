@@ -15,11 +15,11 @@
                         @click-left="onClickLeft"
                         />
                 </div>
-
             </div>
         </van-sticky>
         <!-- 中间(内容不能写死，这里放路由匹配的动态内容) 使用通信-->
-        <keep-alive exclude="goodsDetails,newsData">
+        <!-- <keep-alive exclude="goodsDetails,newsData,user-container,editSite,siteList"> -->
+        <keep-alive include="goodsList,home,photo,newsList">
             <router-view></router-view>
         </keep-alive>
         <!-- 底部 -->
@@ -44,15 +44,21 @@ import { mapState } from "vuex";
                 active:0,
                 title:"",
                 isBottom:true,
+
+
             }
         },
         methods:{
             // 点击导航栏的<跳转回首页
             onClickLeft(){
-                // 显示底部
-                this.isBottom = true;
-                // 回退
-                this.$router.go(-1);
+
+              var hash =  location.hash.substring(1);
+                if(hash == "/login"){
+                    this.$router.push("/home")
+                }else{
+                    // 回退
+                    this.$router.go(-1);
+                }
             }
         },
         //计算属性
@@ -85,9 +91,7 @@ import { mapState } from "vuex";
 </script>
 
 <style lang="scss" scoped>
-
         .app_content{
-
             background-color: #F1F1F1;
             height: 100vh;
             min-width: 320px;

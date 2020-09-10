@@ -18,8 +18,8 @@ instance.interceptors.request.use(async function (config) {
     token && ( config.headers.token = token );
     // 设置isPending为true 开始加载
     store.commit("changeIsPending",true)
-    // 延迟一秒
-    await sleep(800)
+    // 延迟1秒
+    await sleep(1000)
 
     return config;
 }, function (error) {

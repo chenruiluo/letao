@@ -51,6 +51,7 @@
 import { Swipe, SwipeItem,Divider,Stepper,GoodsAction, GoodsActionIcon, GoodsActionButton  } from 'vant';
 // 请求
 import {getThumbimages,getGoodsInfo} from "@/api/index.js"
+import {isToken} from '@/api/index.js'
     export default {
         name:"goodsDetails",
         props:['goodsId'],
@@ -80,6 +81,8 @@ import {getThumbimages,getGoodsInfo} from "@/api/index.js"
                 // console.log(this.goodsData);
             },
             addShop(){
+                // 判断是否登录
+                isToken();
                 var obj = {
                     id:this.goodsId,
                     number:this.value,

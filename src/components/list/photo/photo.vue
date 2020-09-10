@@ -18,6 +18,7 @@ import { TreeSelect } from 'vant';
 import photoData from "@/components/list/common/photoData.vue"
 import { getCateGory,getCateData } from "@/api/index.js"
     export default {
+        name:"photo",
         data() {
             return {
                 items:[],

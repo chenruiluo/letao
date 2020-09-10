@@ -59,6 +59,9 @@ var store = new Vuex.Store({
          // 修改isPending的状态
          changeIsPending(state, bool){
             state.isPending = bool;
+        },
+        logoutCar(state){
+            state.shopping = [];
         }
     },
     // getter就是对数据状态进行处理筛选，我们可以通过getter处理过后再返回给组件使用
@@ -111,7 +114,7 @@ var store = new Vuex.Store({
                 obj[v.id] = v.number
             })
             return obj;
-        }
+        },
 
     },
 

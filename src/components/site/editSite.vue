@@ -21,6 +21,8 @@ import { AddressEdit, } from "vant";
 import areaList from "@/util/area.js";
 import { deleteAddress,updateAddress,getAddress } from "@/api/index.js"
 export default {
+
+  name:"editSite",
   props: ["site"],
   data() {
     return {

@@ -1,64 +1,66 @@
 <template>
     <div class="car_container">
-            <div class="vacancy" v-if="isShow">
-                <h3>亲，您的购物车为空，去 <router-link to="/home">首页</router-link>逛逛吧!</h3>
-                <van-divider />
-                <div class="car_img">
-                    <img src="../../assets/images/car.png" alt="">
+        <div class="vacancy" v-if="isShow">
+            <h3>亲，您的购物车为空，去 <router-link to="/home">首页</router-link>逛逛吧!</h3>
+            <van-divider />
+            <div class="car_img">
+                <img src="../../assets/images/car.png" alt="">
+            </div>
+            <div class="login">
+                <router-link to="/home">登录</router-link>后可以同步电脑与手机购物车中的商品
+            </div>
+        </div>
+        <div class="shop_car" v-else>
+            <van-divider>收货地址</van-divider>
+
+            <van-address-list
+                v-model="chosenAddressId"
+                :list="list"
+                default-tag-text="默认"
+                @edit="onEdit"
+            />
+            <van-divider>购买的商品</van-divider>
+        <div class="item">
+            <div class="shop" v-for="(item,i) in carList" :key="item.id">
+                <div class="switch">
+                    <van-switch @change="switchover(item.id,$store.getters.getSelected[item.id])"
+                    v-model="$store.getters.getSelected[item.id]" />
                 </div>
-                <div class="login">
-                    <router-link to="/home">登录</router-link>后可以同步电脑与手机购物车中的商品
+                <!-- <div class="goods-img"> -->
+                <img :src="item.thumb_path" >
+                <!-- </div> -->
+                <div class="info">
+                    <div class="title overflow_ellipsis">
+                            {{ item.title }}
+                    </div>
+                    <div class="row">
+                        <span class="price">¥{{item.sell_price}}</span>
+                        <van-stepper @change="changeNumber(item.id,$store.getters.getNumber[item.id])" v-model="$store.getters.getNumber[item.id]" />
+                        <van-button type="danger" @click="delCar(item.id,i)">删除</van-button>
+                    </div>
                 </div>
             </div>
-            <div class="shop_car" v-else>
-                <van-divider>收货地址</van-divider>
 
-                <van-address-list
-                    v-model="chosenAddressId"
-                    :list="list"
-                    default-tag-text="默认"
-                    @edit="onEdit"
-                />
-                <van-divider>购买的商品</van-divider>
-            <div class="item">
-                <div class="shop" v-for="(item,i) in carList" :key="item.id">
-                    <div class="switch">
-                        <van-switch @change="switchover(item.id,$store.getters.getSelected[item.id])"
-                        v-model="$store.getters.getSelected[item.id]" />
-                    </div>
-                    <!-- <div class="goods-img"> -->
-                    <img :src="item.thumb_path" >
-                    <!-- </div> -->
-                    <div class="info">
-                        <div class="title overflow_ellipsis">
-                                {{ item.title }}
-                        </div>
-                        <div class="row">
-                            <span class="price">¥{{item.sell_price}}</span>
-                            <van-stepper @change="changeNumber(item.id,$store.getters.getNumber[item.id])" v-model="$store.getters.getNumber[item.id]" />
-                            <van-button type="danger" @click="delCar(item.id,i)">删除</van-button>
-                        </div>
-                    </div>
-                </div>
+            <van-cell title="微信支付" icon="gold-coin-o" is-link />
 
-                <van-cell title="微信支付" icon="gold-coin-o" is-link />
-
-                <div class="submit-bar">
-                    <van-submit-bar :price="$store.getters.buyCountAndTotal.total" button-text="提交订单" @submit="onSubmit">
-                    <span>共{{$store.getters.buyCountAndTotal.count}}件商品</span>
-                    <template #tip>
-                        默认微信支付
-                    </template>
-                    </van-submit-bar>
-                </div>
+            <div class="submit-bar">
+                <van-submit-bar :price="$store.getters.buyCountAndTotal.total" button-text="提交订单" @submit="onSubmit">
+                <span>共{{$store.getters.buyCountAndTotal.count}}件商品</span>
+                <template #tip>
+                    默认微信支付
+                </template>
+                </van-submit-bar>
             </div>
+        </div>
         </div>
     </div>
 </template>
 
 <script>
+
 import {getShopCarList,getAddress} from "@/api/index.js"
 import { Divider,AddressList,Switch,Stepper,Button,SubmitBar,Cell, CellGroup  } from 'vant';
+import {isToken} from '@/api/index.js'
     export default {
         data() {
             return {
@@ -130,14 +132,18 @@ import { Divider,AddressList,Switch,Stepper,Button,SubmitBar,Cell, CellGroup  } 
             },
        },
         created(){
+            // 判断是否有登录
+            isToken(),
             this.setDefault();
             this.$parent.title = "我的购物车";
             // this.$parent.active = -1;
-            this.$parent.isBottom = true;
+            this.$parent.isBottom = false;
             // 判断购物车里是否有数据
-            this.getShopList()
+            this.getShopList();
+            console.log(this.$store.getters.isUsers);
         },
         computed:{
+             // 判断是否登录
             isShow(){
                 if(this.carList.length == 0){
                     // this.blank = false;

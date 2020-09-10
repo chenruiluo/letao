@@ -2,7 +2,7 @@
     <div class="user-container">
         <div class="basic">
             <div class="logo">
-                <img src="../../assets/images/logo.png">
+                <img @click="clickImg" src="../../assets/images/logo.png">
                 <span class="name">用户名: {{name}}</span>
             </div>
             <van-cell-group>
@@ -30,9 +30,10 @@
 </template>
 
 <script>
-import { Button,Dialog,Cell, CellGroup  } from 'vant';
+import { Button,Dialog,Cell, CellGroup,ImagePreview  } from 'vant';
 import {isToken} from '@/api/index.js'
     export default {
+        name:"user-container",
         data() {
             return {
                 name,
@@ -48,11 +49,15 @@ import {isToken} from '@/api/index.js'
                 }).then(() => {//确定
                     localStorage.setItem("token","");
                     localStorage.setItem("userInfo","{}");
+                    this.$store.commit("logoutCar")
                     this.$router.push("/login");
                 }).catch(() => {//取消
                     this.$toast("取消");
                 });
 
+            },
+            clickImg(){
+                ImagePreview(['http://localhost:8080/img/logo.c0057232.png']);
             }
         },
         components:{
@@ -60,15 +65,19 @@ import {isToken} from '@/api/index.js'
             [Dialog.Component.name]: Dialog.Component,
             "van-cell-group":CellGroup,
             "van-cell":Cell,
+            [ImagePreview.Component.name]: ImagePreview.Component,
         },
         created(){
             // 判断是否登录
             isToken();
-            var user =  this.$store.state.userinfo;
+            var user = this.$store.state.userinfo;
             this.name = user.username;
             this.$parent.title = "个人中心";
             this.$parent.isBottom = false;
-        }
+        },
+        // activated(){
+        //     this.$parent.isBottom = false;
+        // }
     }
 </script>
 

@@ -1,19 +1,22 @@
 <template>
     <div class="siteList-container">
+
         <van-address-list
-        v-model="chosenAddressId"
-        :list="list"
-        default-tag-text="默认"
-        @add="onAdd"
-        @edit="onEdit"
-        />
+            v-model="chosenAddressId"
+            :list="list"
+            default-tag-text="默认"
+            @add="onAdd"
+            @edit="onEdit"
+            />
+
     </div>
 </template>
 
 <script>
-import { AddressList } from 'vant';
+import { AddressList,SwipeCell,Button,Cell  } from 'vant';
 import { getAddress } from "@/api/index.js"
     export default {
+        name:"siteList",
         data() {
             return {
                 chosenAddressId: '1',
@@ -52,8 +55,15 @@ import { getAddress } from "@/api/index.js"
             this.$parent.title = "地址管理";
             this.$parent.isBottom = true;
         },
+        activated(){
+            this.$parent.title = "地址管理";
+            this.$parent.isBottom = true;
+        },
         components:{
             "van-address-list":AddressList,
+            "van-swipe-cell":SwipeCell,
+            "van-button":Button,
+            "van-cell":Cell
         }
     }
 </script>

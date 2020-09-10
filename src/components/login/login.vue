@@ -57,7 +57,7 @@ export default {
                 // 存储到本地
                 localStorage.setItem("token",token);
                 localStorage.setItem("userInfo",JSON.stringify(userInfo) );
-                this.$router.push("/home");
+                this.$router.go(-1);
             }
 
         },

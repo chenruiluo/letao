@@ -3,6 +3,7 @@ import vueRouter from "vue-router";
 
 Vue.use(vueRouter);
 
+// import userImg from "@/asset/images/logo.png"
 import home from "@/components/tabbar/home.vue"
 import mycar from "@/components/tabbar/mycar.vue"
 import user from "@/components/tabbar/user.vue"
