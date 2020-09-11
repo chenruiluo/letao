@@ -60,6 +60,7 @@ var store = new Vuex.Store({
          changeIsPending(state, bool){
             state.isPending = bool;
         },
+        // 清空购物车
         logoutCar(state){
             state.shopping = [];
         }
@@ -107,13 +108,21 @@ var store = new Vuex.Store({
             })
             return obj;
         },
-        // 获取商品的状态
+        // 获取商品的数量
         getNumber(state){
             var obj = {}
             state.shopping.forEach(v =>{
                 obj[v.id] = v.number
             })
             return obj;
+        },
+         //查找出商品id
+         orderCarIds(state){
+            // 用来存储id
+            var arr = [];
+            // 查找出所有的id
+            state.shopping.forEach( v => v.selected && arr.push(v.id) )
+            return arr.join(",")
         },
 
     },

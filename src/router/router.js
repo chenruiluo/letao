@@ -3,7 +3,6 @@ import vueRouter from "vue-router";
 
 Vue.use(vueRouter);
 
-// import userImg from "@/asset/images/logo.png"
 import home from "@/components/tabbar/home.vue"
 import mycar from "@/components/tabbar/mycar.vue"
 import user from "@/components/tabbar/user.vue"
@@ -17,6 +16,7 @@ import register from "@/components/login/register.vue"
 import siteList from "@/components/site/siteList.vue"
 import editSite from "@/components/site/editSite.vue"
 import addSite from "@/components/site/addSite.vue"
+import order from "@/components/order/order.vue"
 
 // 实例化路由对象，写路由匹配规则
 let router = new vueRouter({
@@ -35,6 +35,7 @@ let router = new vueRouter({
         {path:"/siteList",component:siteList},
         {path:"/editSite/:site",component:editSite,props:true},
         {path:"/addSite",component:addSite},
+        {path:"/order",component:order},
     ]
 });
 // 路由的前置守卫

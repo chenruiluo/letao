@@ -92,3 +92,11 @@ export function deleteAddress(addressId){
 export function updateAddress(addressId,address){
     return instance.post(`/updateaddress/${addressId}`,address)
 }
+// 提交订单
+export function commitOrder(order){
+    return instance.post(`/commitorder`,order)
+}
+// 获取订单
+export function getOrder(userId){
+    return instance.post(`/userorder/${userId}`)
+}

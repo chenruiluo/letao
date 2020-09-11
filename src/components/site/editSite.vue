@@ -29,7 +29,7 @@ export default {
       areaList,
       searchResult: [],
       addressInfo:JSON.parse(this.site),
-      country:"",
+    //   country:"",
     };
   },
   methods: {
@@ -42,12 +42,14 @@ export default {
                 // 将数组的默认状态转成flase值
                 res.forEach(async (v) =>{
                     v.isDefault = false
+                    console.log(123);
                     await updateAddress(v.id,v);
                 })
         }
         // 没修改地区就用原来的地区
-        addressInfo.country = this.country == "" ? this.addressInfo.country : this.country;
+        addressInfo.country = addressInfo.country == "" ? this.addressInfo.country : addressInfo.country;
         console.log(addressInfo.isDefault);
+        console.log(addressInfo.country);
         var {status,message} = await updateAddress(addressInfo.id,addressInfo);
         this.$toast(message)
         if(status == 0){
@@ -64,9 +66,9 @@ export default {
         }
     },
 
-    // 修改收件地区时触发
+    // // 修改收件地区时触发
     changeArea(val) {
-        this.country=val[2].name;
+        // this.country=val[2].name;
     },
 
   },

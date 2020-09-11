@@ -3,13 +3,13 @@
         <div class="basic">
             <div class="logo">
                 <img @click="clickImg" src="../../assets/images/logo.png">
-                <span class="name">用户名: {{name}}</span>
+                <span class="name">用户名: {{$store.state.userinfo.username}}</span>
             </div>
             <van-cell-group>
                 <van-cell title="修改密码" is-link />
             </van-cell-group>
             <van-cell-group>
-                <van-cell title="我的订单" is-link />
+                <van-cell to="/order" title="我的订单" is-link />
             </van-cell-group>
             <van-cell-group>
                 <van-cell to="/siteList" title="地址管理" class="site" is-link />
@@ -36,7 +36,7 @@ import {isToken} from '@/api/index.js'
         name:"user-container",
         data() {
             return {
-                name,
+                // name,
             }
         },
         methods:{
@@ -67,11 +67,11 @@ import {isToken} from '@/api/index.js'
             "van-cell":Cell,
             [ImagePreview.Component.name]: ImagePreview.Component,
         },
-        created(){
+       async created(){
             // 判断是否登录
-            isToken();
-            var user = this.$store.state.userinfo;
-            this.name = user.username;
+            await isToken();
+            // var user = this.$store.state.userinfo;
+            // this.name = user.username;
             this.$parent.title = "个人中心";
             this.$parent.isBottom = false;
         },

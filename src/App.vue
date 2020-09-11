@@ -51,7 +51,7 @@ import { mapState } from "vuex";
         methods:{
             // 点击导航栏的<跳转回首页
             onClickLeft(){
-
+              // 获取路由地址
               var hash =  location.hash.substring(1);
                 if(hash == "/login"){
                     this.$router.push("/home")

@@ -14,12 +14,14 @@ instance.interceptors.request.use(async function (config) {
     // console.log(config);
 
     var token = localStorage.getItem("token") || "";
+    config.headers['If-Modified-Since'] = 0; //设置请求头，告诉服务端不要缓存，获取最新数据
+    // config.addHeader("Access-Control-Allow-Origin", "*");
     // 设置请求头
     token && ( config.headers.token = token );
     // 设置isPending为true 开始加载
     store.commit("changeIsPending",true)
-    // 延迟1秒
-    await sleep(1000)
+    // 延迟500豪秒
+    await sleep(500)
 
     return config;
 }, function (error) {
@@ -48,7 +50,7 @@ instance.interceptors.response.use(function (response) {
         default:
             this.$toast("网络延迟")
     }
-    return Promise.reject(error);
+    // return Promise.reject(error);
 });
 
 
